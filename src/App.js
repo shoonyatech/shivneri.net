@@ -1,39 +1,27 @@
 import React, { Component } from 'react';
-import {Text,View, StyleSheet } from "react-native";
+import './index.css';
 
-export default class App extends Component {
+class App extends Component {
   render() {
     return (
-      <View style={styles.app}>
-        <View style={styles.appHeader}>
-          <Text style={styles.appTitle}>Welcome to React ⚛️</Text>
-        </View>
-        <Text style={styles.appIntro}>
-           Hello world
-        </Text>
-      </View>
-    )
+      <div className="App">
+        <header className="App-header">
+          <img className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
+        </header>
+      </div>
+    );
   }
 }
 
-const styles = StyleSheet.create({
-  app: {
-    flex: 1
-  },
-  appHeader: {
-    flex: 1,
-    backgroundColor: '#222',
-    padding: 20,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  appTitle: {
-    fontSize: 16,
-    color: 'white'
-  },
-  appIntro: {
-    flex: 2,
-    fontSize: 30,
-    textAlign: 'center'
-  }
-})
+export default App;
