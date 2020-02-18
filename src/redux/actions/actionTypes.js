@@ -1,0 +1,3 @@
+export const LOAD_FORTS_SUCCESS = "LOAD_FORTS_SUCCESS";
+export const BEGIN_API_CALL = "BEGIN_API_CALL";
+export const API_CALL_ERROR = "API_CALL_ERROR";

@@ -1,18 +1,19 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { render } from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App";
 import "./index.css";
-import App from "../src/components/App/App";
-import { createBrowserHistory } from "history";
-import { BrowserRouter, Route } from "react-router-dom";
-import SignIn from "../src/components/SignIn/SignIn";
-import SignOut from "../src/components/SignOut/SignOut";
-import * as serviceWorker from "./serviceWorker";
+import configureStore from "./redux/configureStore";
+import { Provider as ReduxProvider } from "react-redux";
 
-ReactDOM.render(
-  <BrowserRouter>
-    <Route component={App} />
-  </BrowserRouter>,
+const store = configureStore();
+
+render(
+  <ReduxProvider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </ReduxProvider>,
   document.getElementById("root")
 );
-
-serviceWorker.register();

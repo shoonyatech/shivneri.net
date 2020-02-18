@@ -1,12 +1,5 @@
-import React, { Component } from "react";
-import SignIn from "../SignIn/SignIn";
-import SignOut from "../SignOut/SignOut";
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import React from "react";
 
-class Home extends Component {
-  render() {
-    return <div>Home</div>;
-  }
-}
+const Home = () => <h1>Oops! Page not found.</h1>;
 
 export default Home;
