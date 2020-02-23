@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, } from "react-router-dom";
 import HomePage from "./components/Home/Home";
 import LogIn from "./components/SignIn/SignIn";
 import LogOut from "./components/SignOut/SignOut";
@@ -14,8 +14,8 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
-        <Route exact path="/login" component={LogIn} />
-        <Route exact path="/logout" component={LogOut} />
+        <Route path="/login" component={LogIn} />
+        <Route path="/logout" component={LogOut} />
         <Route component={PageNotFound} />
       </Switch>
       <ToastContainer autoClose={3000} hideProgressBar />
