@@ -3,6 +3,7 @@ import { Route, Switch, } from "react-router-dom";
 import HomePage from "./components/Home/Home";
 import LogIn from "./components/SignIn/SignIn";
 import LogOut from "./components/SignOut/SignOut";
+import FortDetailPage from "./components/FortDetailPage";
 import Header from "./components/common/Header"
 import PageNotFound from "./components/PageNotFound";
 import { ToastContainer } from "react-toastify";
@@ -14,6 +15,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path="/fort/:id" component={FortDetailPage} />
         <Route path="/login" component={LogIn} />
         <Route path="/logout" component={LogOut} />
         <Route component={PageNotFound} />

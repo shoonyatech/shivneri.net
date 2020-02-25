@@ -11,7 +11,6 @@ import { toast } from "react-toastify";
 class Home extends React.Component {
 
     componentDidMount() {
-        console.log("##print##")
         this.props.dispatch(fortActions.loadForts())
     }
 
