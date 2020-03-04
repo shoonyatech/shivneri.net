@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
-import { getForts } from "../src/redux/actions/fortActions";
 import configureStore from "./redux/configureStore";
 import { Provider as ReduxProvider } from "react-redux";
 
