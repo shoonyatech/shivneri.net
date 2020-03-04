@@ -1,10 +1,10 @@
 import React from "react";
-import { Route, Switch, } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/Home/Home";
 import LogIn from "./components/SignIn/SignIn";
 import LogOut from "./components/SignOut/SignOut";
 import FortDetailPage from "./components/FortDetailPage";
-import Header from "./components/common/Header"
+import Header from "./components/common/Header";
 import PageNotFound from "./components/PageNotFound";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
