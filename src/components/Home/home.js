@@ -9,6 +9,7 @@ import { bindActionCreators } from "redux";
 import { Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
 import FilterEvent from "../FilterEvent";
+import Checkbox1 from "./Hello";
 
 class Home extends React.Component {
   constructor(props) {
@@ -48,9 +49,11 @@ class Home extends React.Component {
   handleChange = e => {
     const item = e.target.name;
     const isChecked = e.target.checked;
+    console.log(this.state.checkedItems);
     this.setState(prevState => ({
       checkedItems: prevState.checkedItems.set(item, isChecked)
     }));
+    console.log(this.state.checkedItems);
   };
 
   filterState = props => {
@@ -85,20 +88,21 @@ class Home extends React.Component {
           <span className="filter">Filter State</span>
           {this.filterState(this.props).map(state => {
             return (
-              <FilterEvent
-                checked={this.state.checkedItems.get(state)}
-                change={this.handlechange}
+              <Checkbox1
                 name={state}
+                checked={this.state.checkedItems.get(state)}
+                onChange={this.handleChange}
               />
             );
           })}
           <span className="filter">Filter City</span>
           {this.filterCity(this.props).map(city => {
             return (
-              <FilterEvent
-                checked={this.state.checkedItems.get(city)}
-                change={this.handlechange}
-                name={city}
+              <Checkbox1
+                name={city + "filter"}
+                checked={this.state.checkedItems.get(city + "filter")}
+                onChange={this.handleChange}
+                label={city}
               />
             );
           })}

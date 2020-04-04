@@ -8,6 +8,7 @@ export default function FilterEvent(props) {
 
   return (
     <FormGroup row>
+      {console.log(checked)}
       <FormControlLabel
         control={
           <Checkbox
