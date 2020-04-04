@@ -3,18 +3,22 @@ import { connect } from "react-redux";
 import * as fortActions from "../../redux/actions/fortActions";
 import FortList from "../FortList";
 import SearchFort from "../SearchFort";
+import FilterFortEvent from "../FilterFortEvent";
 import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { Redirect } from "react-router-dom";
 import { toast } from "react-toastify";
+import FilterEvent from "../FilterEvent";
 
 class Home extends React.Component {
-  constructor(props, context) {
-    super(props, context);
+  constructor(props) {
+    super(props);
     this.state = {
       visibileForts: this.props.forts,
-      searchTerm: ""
+      searchTerm: "",
+      checkedItems: new Map()
     };
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -41,10 +45,64 @@ class Home extends React.Component {
     });
   };
 
+  handleChange = e => {
+    const item = e.target.name;
+    const isChecked = e.target.checked;
+    this.setState(prevState => ({
+      checkedItems: prevState.checkedItems.set(item, isChecked)
+    }));
+  };
+
+  filterState = props => {
+    return props.forts
+      .map(fort => {
+        return fort.state;
+      })
+      .filter((state, index, arr) => {
+        if (arr.indexOf(state) == index) {
+          return state;
+        }
+      });
+  };
+
+  filterCity = props => {
+    return props.forts
+      .map(fort => {
+        return fort.city;
+      })
+      .filter((city, index, arr) => {
+        if (arr.indexOf(city) == index) {
+          return city;
+        }
+      });
+  };
+
   render() {
     return (
       <div>
         <SearchFort label="Search..." OnChange={this.OnChange} />
+        <div className="checkbox-filter">
+          <span className="filter">Filter State</span>
+          {this.filterState(this.props).map(state => {
+            return (
+              <FilterEvent
+                checked={this.state.checkedItems.get(state)}
+                change={this.handlechange}
+                name={state}
+              />
+            );
+          })}
+          <span className="filter">Filter City</span>
+          {this.filterCity(this.props).map(city => {
+            return (
+              <FilterEvent
+                checked={this.state.checkedItems.get(city)}
+                change={this.handlechange}
+                name={city}
+              />
+            );
+          })}
+        </div>
         {this.state.visibileForts.length > 0 || this.state.searchTerm
           ? this.state.visibileForts.map(fort => {
               return <FortList fort={fort} />;
