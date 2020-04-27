@@ -17,9 +17,11 @@ class Home extends React.Component {
     this.state = {
       visibileForts: this.props.forts,
       searchTerm: "",
-      checkedItems: new Map()
+      checkedStateItems: new Map(),
+      checkedCityItems: new Map()
     };
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeCity = this.handleChangeCity.bind(this);
+    this.handleChangeState = this.handleChangeState.bind(this);
   }
 
   componentDidMount() {
@@ -46,14 +48,44 @@ class Home extends React.Component {
     });
   };
 
-  handleChange = e => {
+  handleChangeState = e => {
     const item = e.target.name;
     const isChecked = e.target.checked;
-    console.log(this.state.checkedItems);
     this.setState(prevState => ({
-      checkedItems: prevState.checkedItems.set(item, isChecked)
+      checkedStateItems: prevState.checkedStateItems.set(item, isChecked)
     }));
-    console.log(this.state.checkedItems);
+  };
+
+  filterEventArray = arr => {
+    let element = arr.map(key => {
+      return this.props.forts.filter((fort, index, array) => {
+        return fort.indexOf(key) == index;
+      });
+    });
+    console.log(element);
+  };
+
+  componentDidUpdate = () => {
+    let arr = [];
+    for (let [key, value] of this.state.checkedStateItems.entries()) {
+      if (value === true) {
+        arr.push(key);
+      }
+    }
+    let element = arr.map(key => {
+      return this.props.forts.filter((fort, index, array) => {
+        return this.props.forts.indexOf(key) === index;
+      });
+    });
+    console.log(element);
+  };
+
+  handleChangeCity = e => {
+    const item = e.target.name;
+    const isChecked = e.target.checked;
+    this.setState(prevState => ({
+      checkedCityItems: prevState.checkedCityItems.set(item, isChecked)
+    }));
   };
 
   filterState = props => {
@@ -90,8 +122,8 @@ class Home extends React.Component {
             return (
               <Checkbox1
                 name={state}
-                checked={this.state.checkedItems.get(state)}
-                onChange={this.handleChange}
+                checked={this.state.checkedStateItems.get(state)}
+                onChange={this.handleChangeState}
               />
             );
           })}
@@ -99,9 +131,9 @@ class Home extends React.Component {
           {this.filterCity(this.props).map(city => {
             return (
               <Checkbox1
-                name={city + "filter"}
-                checked={this.state.checkedItems.get(city + "filter")}
-                onChange={this.handleChange}
+                name={city}
+                checked={this.state.checkedCityItems.get(city)}
+                onChange={this.handleChangeCity}
                 label={city}
               />
             );
